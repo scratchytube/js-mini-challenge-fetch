@@ -1,5 +1,25 @@
 # JS Mini Challenge: Fetch
 
+## Instructions
+
+Fork this repo, then run `git clone` to download it locally. Then `cd` into the downloaded directory and open it in your text editor with `code .`.
+
+Run `npm install && npm start` to get started.
+
+## Submitting
+
+When you’re finished, run the following commands in your terminal to submit:
+
+```
+git add .
+git commit -m 'Done'
+git push
+```
+
+To get feedback on your code, make a [pull request from your forked repo](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
+
+## Assignment
+
 We're going to build off the code we worked on in the Events Mini Challenge, and add persistence to our application. That means when we...
 
 - add a new player, or
