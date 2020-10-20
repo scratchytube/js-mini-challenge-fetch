@@ -112,7 +112,7 @@ To check if your fetch request is working, you can look at the `db.json` file to
 
 **When a user clicks the like button for a player**, that player's likes should increase by 1. The player's updated likes should persist on the server, and also be displayed on the page.
 
-To persist the likes, you will need to make a request using `fetch`:
+To persist the likes, you will need to make a request using `fetch`. Make sure you can access to the player's *id*, since you will need that information to put together the URL for the `fetch` request.
 
 ```
 PATCH /players/:id
