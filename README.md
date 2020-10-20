@@ -34,6 +34,7 @@ To check if your server is running, open [http://localhost:3000/players](http://
 You will need to make a request to the server using `fetch`: 
 
 ```
+Request:
 GET /players
 
 Example Response:
@@ -72,6 +73,7 @@ Once you have successfully fetched the players from the server, display them on 
 In order to save the player to the database, you will need to make a request using `fetch`:
 
 ```
+Request:
 POST /players
 
 Headers: 
@@ -115,6 +117,7 @@ To check if your fetch request is working, you can look at the `db.json` file to
 To persist the likes, you will need to make a request using `fetch`. Make sure you can access to the player's *id*, since you will need that information to put together the URL for the `fetch` request.
 
 ```
+Request:
 PATCH /players/:id
 
 Headers: 
