@@ -4,8 +4,6 @@
 
 Fork this repo, then run `git clone` to download it locally. Then `cd` into the downloaded directory and open it in your text editor with `code .`.
 
-Run `npm install && npm start` to get started.
-
 ## Submitting
 
 When you’re finished, run the following commands in your terminal to submit:
@@ -16,7 +14,7 @@ git commit -m 'Done'
 git push
 ```
 
-To get feedback on your code, make a [pull request from your forked repo](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
+To get feedback on your code, make a [pull request from your forked repo](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork). If you worked with a partner, you can tag your partner on the pull request.
 
 ## Assignment
 
