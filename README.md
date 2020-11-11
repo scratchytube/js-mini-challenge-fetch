@@ -20,8 +20,8 @@ To get feedback on your code, make a [pull request from your forked repo](https:
 
 We're going to build off the code we worked on in the Events Mini Challenge, and add persistence to our application. That means when we...
 
-- add a new player, or
 - 'like' a player 
+- add a new goal
 
 ...those changes should be persisted to our server by making a `fetch` request. We'll also need to make a `fetch` request to get our player data from the server for our initial render of the players.
 
@@ -40,103 +40,64 @@ $ npm install -g json-server
 Then, we'll need to start `json-server` and have it use the `db.json` file in this directory as its database:
 
 ```sh
-$ json-server --watch db.json
+$ json-server --watch db.json --routes routes.json
 ```
 
-To check if your server is running, open [http://localhost:3000/players](http://localhost:3000/players) in your browser. You should see an array of all the players from the `db.json` file.
+To check if your server is running, open [http://localhost:3000/players/1](http://localhost:3000/players/1) in your browser. You should see a `player` object with an array of goals, just like we had hard-coded into our application before.
 
-## Deliverable 1: Fetch Players
+## Deliverable 1: Initial Render
 
-**When the application loads**, all the players should be displayed.
+**When the application loads**, display all the information about the first player on the page, including *name*, *nickname*, *photo*, *likes* and *goals*.
 
 You will need to make a request to the server using `fetch`: 
 
 ```
 Request:
-GET /players
-
-Example Response:
-[
-  {
-    id: 1,
-    number: 11,
-    name: "Mo Salah",
-    nickname: "The Egyptian King",
-    photo: "https://cdn.cnn.com/cnnnext/dam/assets/190501145802-mo-salah-exlarge-169.jpg",
-    likes: 1000
-  },
-  {
-    id: 2,
-    number: 9,
-    name: "Roberto Firmino",
-    nickname: "Bobby Chompers",
-    photo: "https://vignette.wikia.nocookie.net/liverpoolfc/images/f/f3/RFirmino2019.jpeg/revision/latest/scale-to-width-down/340?cb=20190807042207",
-    likes: 1000
-  },
-  ...
-]
-```
-
-Once you have successfully fetched the players from the server, display them on the page (you can re-use the code from the previous Mini Challenge to display the players).
-
-**YOUR NOTES**
-```
-
-```
-
-## Deliverable 2: Create Player
-
-**When a user submits the form**, the new player should be persisted in the database.
-
-In order to save the player to the database, you will need to make a request using `fetch`:
-
-```
-Request:
-POST /players
-
-Headers: 
-{ 
-  "Content-Type": "application/json"
-}
-
-Required Keys in Body:
-{ 
-  number: number,
-  name: "string",
-  nickname: "string",
-  photo: "string",
-  likes: 1000
-}
+GET /players/1
 
 Example Response:
 {
-  id: 4,
-  number: 14,
-  name: "Jordan Henderson",
-  nickname: "Hendo",
-  photo: "https://icdn.empireofthekop.com/wp-content/uploads/2020/03/Jordan-Henderson-640x426.jpg",
-  likes: 1000
+  id: 1,
+  number: 11,
+  name: "Mo Salah",
+  nickname: "The Egyptian King",
+  photo: "https://cdn.cnn.com/cnnnext/dam/assets/190501145802-mo-salah-exlarge-169.jpg",
+  likes: 1000,
+  goals: [
+    {
+      id: 1,
+      playerId: 1,
+      link: "https://youtu.be/mKY-kheEhBo",
+      description: "A beautiful long-range goal, straight into the corner. Keeper had no chance!"
+    },
+    {
+      id: 2,
+      playerId: 1,
+      link: "https://youtu.be/mJ8XGUgvoAM",
+      description: "Fantastic strength to hold off a pair of defenders and place it beyond Pickford's reach"
+    }
+  ]
 }
 ```
 
-*After the player has been persisted*, the new player should be displayed on the bottom of the page (you can reuse your code from the previous Mini Challenge to help with this). 
-
-To check if your fetch request is working, you can look at the `db.json` file to see if your player has been added. You can also try refreshing the page to see if the new player still shows up.
+Once you've fetched the player, display the player in the DOM. You can re-use code from your previous Mini Challenges if you'd like, but you're encouraged to write the DOM Manipulation code from scratch for practice.
 
 **YOUR NOTES**
 ```
 
 ```
 
-## Deliverable 3: Like Button
+## Deliverable 2: Like Button
 
 **When a user clicks the like button for a player**, that player's likes should increase by 1. The player's updated likes should persist on the server, and also be displayed on the page.
 
-To persist the likes, you will need to make a request using `fetch`. Make sure you can access to the player's *id*, since you will need that information to put together the URL for the `fetch` request.
+Feel free to reuse your event handling code from the previous mini challenge, but you're encouraged to write it from scratch for practice.
+
+To persist the likes, you will need to make a request using `fetch`. Make sure you include the player's *id* in the URL for the request.
 
 ```
 Request:
-PATCH /players/:id
+PATCH /players/1
 
 Headers: 
 { 
@@ -150,18 +111,63 @@ Required Keys in Body:
 
 Example Response:
 {
-  id: 4,
-  number: 14,
-  name: "Jordan Henderson",
-  nickname: "Hendo",
-  photo: "https://icdn.empireofthekop.com/wp-content/uploads/2020/03/Jordan-Henderson-640x426.jpg",
-  likes: 1001
+  id: 1,
+  number: 11,
+  name: "Mo Salah",
+  nickname: "The Egyptian King",
+  photo: "https://cdn.cnn.com/cnnnext/dam/assets/190501145802-mo-salah-exlarge-169.jpg",
+  likes: 1001,
 }
 ```
 
 It's up to you if you'd like to handle this *optimistically* or *pessimistically*.
 
 To check if your fetch request is working, you can look at the `db.json` file to see if the likes for your player has been updated. You can also try refreshing the page to see if the player's likes still show the updated number.
+
+**YOUR NOTES**
+```
+
+```
+
+## Deliverable 3: Add Goal Video
+
+**When a user submits the form**, a new goal video should be displayed for the player. The new goal video should also persist in the backend, so when you refresh the page, you can still see the new goal video.
+
+Here's a nice goal video you can use, if you don't have one bookmarked already: 
+
+- Link: https://youtu.be/6rmUwoM-KQs?t=131
+- Description: What a hat trick! Amazing pace and dribbling for Salah's third goal of the game.
+
+Feel free to reuse your event handling code from the previous mini challenge, but you're encouraged to write it from scratch for practice.
+
+In order to save the goal video to the database, you will need to make a request using `fetch`:
+
+```
+Request:
+POST /goals
+
+Headers: 
+{ 
+  "Content-Type": "application/json"
+}
+
+Required Keys in Body:
+{ 
+  playerId: integer,
+  link: string,
+  description: string
+}
+
+Example Response:
+{
+  id: 3,
+  playerId: 1,
+  link: "https://youtu.be/6rmUwoM-KQs?t=131",
+  description: "What a hat trick! Amazing pace and dribbling for Salah's third goal of the game."
+}
+```
+
+To check if your fetch request is working, you can look at the `db.json` file to see if your goal has been added to the array of goals. You can also try refreshing the page to see if the new goal still shows up.
 
 **YOUR NOTES**
 ```
