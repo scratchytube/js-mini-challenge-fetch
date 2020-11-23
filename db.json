@@ -1,5 +1,5 @@
 {
-  "players": [
+  "players" [
     {
       "id": 1,
       "number": 11,
@@ -33,7 +33,7 @@
       "likes": 1000
     }
   ],
-  "goals": [
+  "goals" [
     {
       "id": 1,
       "playerId": 1,
